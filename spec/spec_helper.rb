@@ -8,5 +8,5 @@ def param_value(subject, type, title, param)
 end
 
 RSpec.configure do |c|
-  c.module_path = File.join(File.dirname(__FILE__), '../../')
+#  c.module_path = File.join(File.dirname(__FILE__), '../../')
 end

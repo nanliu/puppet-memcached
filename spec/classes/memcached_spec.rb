@@ -48,7 +48,7 @@ describe 'memcached' do
 
         describe "on supported operatingsystem: #{os}" do
 
-          it { should contain_class('memcached::params') }
+          #it { should contain_class('memcached::params') }
 
           it { should contain_package('memcached').with_ensure(param_hash[:package_ensure]) }
 
@@ -90,6 +90,15 @@ describe 'memcached' do
         end
       end
       ['Redhat'].each do |os|
+
+        let :facts do
+          {
+            :operatingsystem => os,
+            :memorysize => '1',
+            :processorcount => '1',
+          }
+        end
+
         describe 'on supported platform' do
           it 'should fail' do
 

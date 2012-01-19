@@ -1,5 +1,15 @@
-PORT="<%= udp_port %>"
-USER="<%= user_real %>"
+# Managed by Puppet
+PORT="<%= tcp_port %>"
+USER="<%= user %>"
 MAXCONN="<%= max_connections %>"
+<% if has_variable?('memcached::max_memory') -%>
 CACHESIZE="<%= max_memory %>"
-OPTIONS=""
+<% else -%>
+CACHESIZE="<%= ((memorysize.to_f*1024)*memory_ratio).floor %>"
+<% end
+options = []
+options << "-U #{udp_port}" if has_variable?('memcached::udp_port')
+options << "-l #{listen_port}" if has_variable?('memcached::listen_port')
+options << "-t #{threads}" if has_variable?('memcached::threads')
+-%>
+OPTIONS="<%= options.join(' ') %>"

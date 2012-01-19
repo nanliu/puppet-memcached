@@ -1,4 +1,4 @@
-# File managed by puppet
+# Managed by Puppet
 
 # Run memcached as a daemon.
 -d
@@ -10,10 +10,10 @@
 logfile <%= logfile %>
 
 # Use <num> MB memory max to use for object storage.
-<% if max_memory -%>
+<% if has_variable?('memcached::max_memory') -%>
 -m <%= max_memory %>
 <% else -%>
--m <%= ((memorysize.to_f*1024)*0.95).floor %>
+-m <%= ((memorysize.to_f*1024)*memory_ratio).floor %>
 <% end -%>
 
 # IP to listen on
@@ -26,10 +26,10 @@ logfile <%= logfile %>
 -U <%= udp_port %>
 
 # Run daemon as user
--u <%= user_real %>
+-u <%= user %>
 
 # Limit the number of simultaneous incoming connections.
 -c <%= max_connections %>
 
 # Number of threads to use to process incoming requests.
--t <%= processorcount %>
+-t <%= threads %>
