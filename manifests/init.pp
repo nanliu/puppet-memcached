@@ -1,39 +1,27 @@
 class memcached(
-  $package_ensure  = 'present',
-  $logfile         = '/var/log/memcached.log',
-  $max_memory      = false,
-  $listen_ip       = '0.0.0.0',
-  $tcp_port        = '11211',
-  $udp_port        = '11211',
-  $user            = '',
-  $max_connections = '8192'
+  $package         = hiera_hash('memcached_package'),
+  $config          = hiera_hash('memcached_config'),
+  $service         = hiera_hash('memcached_service'),
+  $setting         = hiera_hash('memcached_setting'),
 ) {
 
-  include memcached::params
-
-  if $user == '' {
-    $user_real = $memcached::params::user
-  } else {
-    $user_real = $user
+  package { $package['name']:
+    ensure => $package['ensure'],
   }
 
-  package { $memcached::params::package_name:
-    ensure => $package_ensure,
-  }
-
-  file { $memcached::params::config_file:
+  file { $config['path']:
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template($memcached::params::config_tmpl),
-    require => Package[$memcached::params::package_name],
+    content => template($config['template']),
+    require => Package[$package['name']],
   }
 
-  service { $memcached::params::service_name:
+  service { $service['name']:
     ensure     => running,
     enable     => true,
     hasrestart => true,
     hasstatus  => false,
-    subscribe  => File[$memcached::params::config_file],
+    subscribe  => File[$config['file']],
   }
 }
