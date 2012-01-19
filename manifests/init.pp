@@ -1,8 +1,8 @@
 class memcached(
-  $package         = hiera_hash('memcached_package'),
-  $config          = hiera_hash('memcached_config'),
-  $service         = hiera_hash('memcached_service'),
-  $setting         = hiera_hash('memcached_setting'),
+  $package = hiera_hash('memcached_package'),
+  $config  = hiera_hash('memcached_config'),
+  $service = hiera_hash('memcached_service'),
+  $setting = hiera_hash('memcached_setting')
 ) {
 
   package { $package['name']:
