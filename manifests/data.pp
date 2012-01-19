@@ -1,4 +1,9 @@
 class memcached::data {
+  $package = {}
+  $config  = {}
+  $service = {}
+  $setting = {}
+
   $package['ensure']          = present
   $setting['logfile']         = '/var/log/memcached.log'
   $setting['max_memory']      = false
