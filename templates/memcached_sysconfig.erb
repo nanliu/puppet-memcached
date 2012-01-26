@@ -26,10 +26,10 @@ end
 PORT="<%= tcp_port %>"
 USER="<%= user %>"
 MAXCONN="<%= max_connections %>"
-<% if has_variable?('memcached::max_memory') -%>
+<% if has_variable?('memcached::max_memory') and ! max_memory.empty? -%>
 CACHESIZE="<%= max_memory %>"
 <% else -%>
-CACHESIZE="<%= (memory_in_mb(memorysize) * memory_ratio).floor %>"
+CACHESIZE="<%= (memory_in_mb(memorysize) * memory_ratio.to_f).floor %>"
 <% end
 options = []
 options << "-U #{udp_port}" if has_variable?('memcached::udp_port')
