@@ -29,8 +29,8 @@ Set a fixed memory limit in MB:
 * config_path: configuration file path.
 * service_name: service name.
 
-Configuration defaults obtained from memcached wiki:
-http://code.google.com/p/memcached/wiki/NewConfiguringServer
+Configuration defaults obtained from [memcached wiki](http://code.google.com/p/memcached/wiki/NewConfiguringServer)
+
 * user: the account the service runs as.
 * listen_ip: the address to bind the service (defeault: 0.0.0.0)
 * tcp_port: tcp listening port. (default: 11211)
