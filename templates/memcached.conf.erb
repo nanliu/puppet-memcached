@@ -37,7 +37,7 @@ logfile <%= logfile %>
 <% if has_variable?('memcached::max_memory') and ! max_memory.empty? -%>
 -m <%= max_memory %>
 <% else -%>
--m <%= (memory_in_mb(memory_size) * memory_ratio.to_f).floor %>
+-m <%= (memory_in_mb(@memorysize) * memory_ratio.to_f).floor %>
 <% end -%>
 
 # IP to listen on

@@ -2,7 +2,7 @@ class memcached::data {
 
   # Use osfamily if possible:
   case $::osfamily {
-    'debian': {
+    'Debian': {
       $memcached_package_name    = 'memcached'
       $memcached_service_name    = 'memcached'
       $memcached_config_path     = '/etc/memcached.conf'
@@ -10,7 +10,7 @@ class memcached::data {
       $memcached_user            = 'nobody'
       $memcached_logfile         = '/var/log/memcached.log'
     }
-    'redhat': {
+    'RedHat': {
       $memcached_package_name    = 'memcached'
       $memcached_service_name    = 'memcached'
       $memcached_config_path     = '/etc/sysconfig/memcached'
